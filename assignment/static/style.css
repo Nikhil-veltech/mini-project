@@ -1,0 +1,9 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}

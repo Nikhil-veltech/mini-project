@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task App</title>
+</head>
+<body>
+
+<h2>Task Tracker</h2>
+
+<form action="/add" method="POST">
+    <input type="text" name="task" placeholder="Task name" required>
+    <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+    <input type="date" name="beginning_date" required>
+    <input type="date" name="deadline" required>
+    <button type="submit">Add</button>
+</form>
+
+<br>
+
+<table border="1">
+    <tr>
+        <th>Task</th>
+        <th>Amount</th>
+        <th>Beginning Date</th>
+        <th>Deadline</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for task in tasks %}
+    <tr>
+        <td>
+            {% if task.completed %}
+                <s>{{ task.task }}</s>
+            {% else %}
+                {{ task.task }}
+            {% endif %}
+        </td>
+
+        <td>{{ task.amount }}</td>
+        <td>{{ task.beginning_date }}</td>
+        <td>{{ task.deadline }}</td>
+
+        <td>
+            {% if task.completed %}
+                Completed
+            {% else %}
+                Pending
+            {% endif %}
+        </td>
+
+        <td>
+            {% if not task.completed %}
+                <a href="/complete/{{ task.id }}">Mark Done</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
